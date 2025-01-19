@@ -5,7 +5,7 @@ AR = kos32-ar
 LD = kos32-ld
 STRIP = kos32-strip
 
-INSTALLDIR:= /home/autobuild/tools/win32/lib
+INSTALLDIR:= ./
 
 CFLAGS = -c -O2 -ffast-math -Wall -Winline -Wno-attributes -fno-ident -fomit-frame-pointer
 
@@ -93,6 +93,8 @@ CAIRO_SOURCES =					\
 	cairo-pattern.c				\
 	cairo-pdf-operators.c			\
 	cairo-pdf-shading.c			\
+	cairo-pdf-surface.c			\
+	cairo-ps-surface.c				\
 	cairo-pen.c 				\
 	cairo-png.c				\
 	cairo-polygon.c 			\
@@ -172,12 +174,3 @@ $(LIBRARY).dll: $(OBJECTS) Makefile
 
 clean: 
 	-rm -f */*.o 
-
-
-
-
-
-
-
-
- 

@@ -1,0 +1,13 @@
+Package: kos-cairo-dev
+Version: 0.1.0
+Architecture: amd64
+Section: devel
+Depends: kos-newlib kos-pixman-dev kos-zlib-dev kos-freetype-dev
+Pre-Depends: kos32-gcc
+Priority: optional
+Homepage: https://github.com/Egor00f/kos-cairo
+Origin: http://git.kolibrios.org/KolibriOS/kolibrios
+Maintainer: Egor00f <velikiydolbayeb@gmail.com>
+Installed-Size: 8512
+Description: cairo library for kolibrios
+ include and binary files
