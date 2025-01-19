@@ -5,7 +5,14 @@ AR = kos32-ar
 LD = kos32-ld
 STRIP = kos32-strip
 
-INSTALLDIR:= ./
+ifeq ($(OS),Windows_NT)
+	TOOLCHAIN_PATH=C:/MinGW/msys/1.0/home/autobuild/tools/win32
+else
+	TOOLCHAIN_PATH=/home/autobuild/tools/win32
+endif
+
+
+INSTALLDIR:= $(TOOLCHAIN_PATH)/mingw32/lib
 
 CFLAGS = -c -O2 -ffast-math -Wall -Winline -Wno-attributes -fno-ident -fomit-frame-pointer
 
@@ -16,7 +23,7 @@ ARFLAGS = crs
 
 DEFINES = -U__WIN32__ -U_Win32 -U_WIN32 -U__MINGW32__ -U_MSC_VER -DHAVE_CONFIG_H=1 -DCAIRO_NO_MUTEX=1  
 
-INCLUDES = -I. -I../newlib/libc/include -I../pixman -I../zlib -I../libpng -I../freetype/include
+INCLUDES = -I. -I$(TOOLCHAIN_PATH)/include
 
 LIBS:=  -ldll -lfreetype.dll -lz.dll -lpixman-1.dll -lpng16.dll -lgcc -lc.dll
 
@@ -159,10 +166,12 @@ ebox: lib$(LIBRARY).a $(LIBRARY).dll
 
 lib$(LIBRARY).a: $(OBJECTS) Makefile
 	$(AR) $(ARFLAGS) lib$(LIBRARY).a $(OBJECTS)
-	mv -f lib$(LIBRARY).a $(INSTALLDIR)
 
 $(LIBRARY).dll: $(OBJECTS) Makefile
 	$(LD) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS)
+	
+install: lib$(LIBRARY).a $(LIBRARY).dll
+	mv -f lib$(LIBRARY).a $(INSTALLDIR)
 	#sed -e "s/ @[^ ]*//" $(LIBRARY).orig.def > $(LIBRARY).def
 	#sed -f ../newlib/cmd1.sed $(LIBRARY).def > mem
 	#sed -f ../newlib/cmd2.sed mem >$(LIBRARY).inc

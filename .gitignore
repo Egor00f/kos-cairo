@@ -9,3 +9,8 @@ ehthumbs_vista.db
 ._*
 programs/cmm/cmm.code-workspace
 programs/cmm/menu/.gitignore
+
+*.o
+*.a
+*.dll
+*.deb

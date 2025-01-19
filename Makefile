@@ -1,6 +1,6 @@
 LINUX_TOOLCHAIN_PATH = /home/autobuild/tools/win32
 
-PathToCairo = contrib/sdk/sources/pixman
+PathToCairo = contrib/sdk/sources/cairo
 
 install libcairo2.a cairo2.dll clean:
 	$(MAKE) -C $(PathToCairo) $@
